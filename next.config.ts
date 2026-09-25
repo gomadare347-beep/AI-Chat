@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-import withPWA from "next-pwa";
+import withPWAInit from "next-pwa";
 
 const nextConfig: NextConfig = {
   output: "export",
@@ -9,32 +9,19 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   eslint: {
-  ignoreDuringBuilds: true,
-},
-typescript: {
-  ignoreBuildErrors: true,
-},
-devIndicators: false,
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  devIndicators: false,
+};
 
-// Configure PWA settings
-const pwaConfig = withPWA({
+const withPWA = withPWAInit({
   dest: "public",
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === "development", // Disable PWA in development
-  runtimeCaching: [
-    {
-      urlPattern: /^https?.*/,
-      handler: "NetworkFirst",
-      options: {
-        cacheName: "offlineCache",
-        expiration: {
-          maxEntries: 200,
-          maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
-        },
-      },
-    },
-  ],
+  disable: process.env.NODE_ENV === "development",
 });
 
-export default pwaConfig(nextConfig as any);
+export default withPWA(nextConfig as any);
