@@ -87,6 +87,9 @@ export default function RootLayout({
   return (
     <html lang="zh" className="h-full">
       <body className="h-full bg-[#171717] text-white">
+　　　　　<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+        <script dangerouslySetInnerHTML={{ __html: "eruda.init();" }} />
+        <GoogleAnalytics />
         <GoogleAnalytics />
         <SoundProvider>
           <LanguageProvider>
