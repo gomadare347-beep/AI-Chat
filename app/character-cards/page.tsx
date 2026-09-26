@@ -315,18 +315,6 @@ export default function CharacterCards() {
     initializeData();
   }, []);
 
-  // Check if this is the first visit and auto-download preset characters
-  useEffect(() => {
-    const isFirstVisit = localStorage.getItem("characterCardsFirstVisit") !== "false";
-    
-    // Auto-download preset characters if:
-    // 1. It's the first visit, OR
-    // 2. Character list is empty (regardless of first visit status)
-    if ((isFirstVisit || characters.length === 0) && characters.length === 0 && !isLoading && !isDownloadingPresets) {
-      downloadPresetCharacters();
-    }
-  }, [characters.length, isLoading, isDownloadingPresets]);
-
   if (!mounted) return null;
 
   return (
